@@ -29,8 +29,7 @@ public class ArticleController {
                          Model model
 
     ) {
-        model.addAttribute("boardList",services.readArticleAll());
-        model.addAttribute("returnBoardType","전체 게시판");
+       createModel(model);
         services.createArticle(title, content, password, articleType );
         return "boards/board";
     }
@@ -48,13 +47,46 @@ public class ArticleController {
             @RequestParam("password") String password,
             Model model
     ){
-        Article article = services.findById(id);
-        if(article.getPassword().equals(password)){
+        Article crrentArticle = services.findById(id);
+        if(crrentArticle !=null && crrentArticle.getPassword().equals(password)){
             services.deleteById(id);
         }
+        createModel(model);
+        return "boards/board";
+    }
+
+    @RequestMapping("{id}/update")
+    public String update(
+            Model model,
+            @PathVariable("id") Long id
+    ){
+        model.addAttribute("article",services.findById(id));
+        return "articles/update-view";
+    }
+
+    @PostMapping("{id}/update")
+    public String update(
+            Model model,
+            @PathVariable("id") Long id,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content,
+            @RequestParam("password") String password,
+            @RequestParam("articleType") String articleType
+    ){
+        Article currentArticle = services.findById(id);
+
+        if( currentArticle !=null && currentArticle.getPassword().equals(password)){
+            services.update(id,title,content,articleType);
+        }
+        createModel(model);
+        return "boards/board";
+    }
+
+
+
+    public void createModel(Model model){
         model.addAttribute("boardList",services.readArticleAll());
         model.addAttribute("returnBoardType","전체 게시판");
-        return "boards/board";
     }
 
 }

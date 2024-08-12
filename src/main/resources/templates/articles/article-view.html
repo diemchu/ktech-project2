@@ -72,6 +72,7 @@
 </head>
 <body>
 <div id="div1" class="container" >
+    <h2>Title: [[${article.title}]]</h2>
     <form method="post" th:action="@{/articles/{id}/delete (id=${article.id})}">
         <label for="content">Content:</label>
         <textarea id="content" name="content" rows="4" readonly>[[${article.content}]]</textarea>
@@ -79,18 +80,16 @@
         <input type="password" id="password" name="password">
         <button type="submit" class="btn">게시글 삭제</button>
     </form>
-    <h2>Title: [[${article.title}]]</h2>
-
 </div>
 
 <div id="div2" class="container actions">
-    <a href="#" class="btn">돌아가기</a>
-    <a href="#" class="btn">수정하기</a>
+    <a href="/boards/board" class="btn">돌아가기</a>
+    <a th:href="@{/articles/{id}/update (id=${article.id})}" class="btn">수정하기</a>
 </div>
 
 <div id="div3" class="container">
     <h1>댓글 달기</h1>
-    <form action="#" method="post">
+    <form th:action="@{/comments/{articleId}/comment (articleId = ${article.id})}" method="post">
         <label for="form-password">Password:</label>
         <input type="password" id="form-password" name="password">
         <label for="form-content">Content:</label>
@@ -101,10 +100,10 @@
 
 <div id="div4" class="container">
     <form>
-        <h3>Nội dung bình luận</h3>
+        <h3>  </h3>
         <label for="comment-password">Password:</label>
-        <input type="password" id="comment-password" name="comment-password">
-        <button type="submit" class="btn">Xoá</button>
+        <input type="password" id="comment-password" name="password">
+        <button type="submit" class="btn">댓글 삭제</button>
     </form>
 </div>
 

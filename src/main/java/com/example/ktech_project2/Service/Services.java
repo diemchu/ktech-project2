@@ -2,6 +2,7 @@ package com.example.ktech_project2.Service;
 
 
 import com.example.ktech_project2.Model.Article;
+import com.example.ktech_project2.Model.Comment;
 import com.example.ktech_project2.Repository.ArticleRepository;
 import com.example.ktech_project2.Repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +36,28 @@ public class Services {
     }
     //아이디로 객체를 가져온다
     public  Article findById(Long id){
-        return  articleRepository.findById(id).orElse(null);
+        return  articleRepository.findById(id).orElseThrow();
     }
     //아이디로 article 삭제
     public  void deleteById(Long id){
         articleRepository.deleteById(id);
+    }
+    // update article method
+    public void update(Long id ,String title,String content,String articleType){
+        Article article = new Article();
+        article.setId(id);
+        article.setTitle(title);
+        article.setArticleType(articleType);
+        article.setContent(content);
+        articleRepository.save(article);
+    }
+    //create comment
+    public void createComment(Long articleId,String content,String password){
+        Comment comment = new Comment();
+        comment.setPassword(password);
+        comment.setCommentedArticleId(findById(articleId));
+        comment.setContent(content);
+        System.out.println(comment);
+        commentRepository.save(comment);
     }
 }
