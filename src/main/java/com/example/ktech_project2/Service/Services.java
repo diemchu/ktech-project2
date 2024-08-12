@@ -37,4 +37,8 @@ public class Services {
     public  Article findById(Long id){
         return  articleRepository.findById(id).orElse(null);
     }
+    //아이디로 article 삭제
+    public  void deleteById(Long id){
+        articleRepository.deleteById(id);
+    }
 }

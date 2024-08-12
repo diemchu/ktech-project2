@@ -72,13 +72,15 @@
 </head>
 <body>
 <div id="div1" class="container" >
+    <form method="post" th:action="@{/articles/{id}/delete (id=${article.id})}">
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="4" readonly>[[${article.content}]]</textarea>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="submit" class="btn">게시글 삭제</button>
+    </form>
     <h2>Title: [[${article.title}]]</h2>
-    <label for="content">Content:</label>
-    <textarea id="content" name="content" rows="4" readonly>[[${article.content}]]</textarea>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-    <button type="submit" class="btn">게시글 삭제</button>
 </div>
 
 <div id="div2" class="container actions">
@@ -98,11 +100,12 @@
 </div>
 
 <div id="div4" class="container">
-    <h2>Nội dung bình luận</h2>
-    <p>Đây là nội dung bình luận hiện tại.</p>
-    <label for="comment-password">Nhập mật khẩu:</label>
-    <input type="password" id="comment-password" name="comment-password">
-    <button class="btn">Xoá</button>
+    <form>
+        <h3>Nội dung bình luận</h3>
+        <label for="comment-password">Password:</label>
+        <input type="password" id="comment-password" name="comment-password">
+        <button type="submit" class="btn">Xoá</button>
+    </form>
 </div>
 
 </body>

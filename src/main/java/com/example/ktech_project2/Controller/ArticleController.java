@@ -42,4 +42,19 @@ public class ArticleController {
         return "articles/article-view";
     }
 
+    @PostMapping("{id}/delete")
+    public  String delete(
+            @PathVariable("id") Long id,
+            @RequestParam("password") String password,
+            Model model
+    ){
+        Article article = services.findById(id);
+        if(article.getPassword().equals(password)){
+            services.deleteById(id);
+        }
+        model.addAttribute("boardList",services.readArticleAll());
+        model.addAttribute("returnBoardType","전체 게시판");
+        return "boards/board";
+    }
+
 }
