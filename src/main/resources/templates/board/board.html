@@ -2,9 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 게시판</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .links {
+            background: #fff;
+            padding: 10px; /* Giảm padding tổng thể */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap; /* Cho phép wrap nếu không đủ không gian */
+            gap: 5px; /* Khoảng cách nhỏ hơn giữa các thẻ <a> */
+        }
+        .links a {
+            text-decoration: none;
+            color: #007bff;
+            padding: 8px 12px; /* Giảm padding */
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-size: 14px; /* Giảm kích thước chữ */
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .links a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .content {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content p {
+            margin: 0;
+            padding: 10px 0;
+        }
+        .table-container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-container th, .table-container td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .table-container th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .table-container tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .table-container tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="links">
+        <a href="#">전체 게시판</a>
+        <a href="#">자유 게시판</a>
+        <a href="#">개발 게시판</a>
+        <a href="#">일상 게시판</a>
+        <a href="#">사건사고 게시판</a>
+    </div>
 
+    <div class="content" id="content">
+        <p> 게시판 </p> <br>
+        <a href="#">게시글 작성</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>TITLE</th>
+                <th>BOARD</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Sample Title 1</td>
+                <td>Sample Board 1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

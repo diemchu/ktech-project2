@@ -5,10 +5,11 @@ import lombok.Getter;
 
 @Getter
 public enum ArticleTypes {
-    TYPE1("자유게시판"),
-    TYPE2("개발게시판"),
-    TYPE3("일상게시판"),
-    TYPE4("사건사고게시판");
+    FreeBoard("자유게시판"),
+    DevelopmentBoard("개발게시판"),
+    DailyBoard("일상게시판"),
+    IncidentBoard("사건사고게시판");
+
 
     private final String description;
 
