@@ -14,5 +14,6 @@ public class Comment {
     String password;
     @ManyToOne
     @ToString.Exclude
-    private  Article commentedArticleId;
+    @JoinColumn(name = "article_id")
+    private  Article commentedArticle;
 }

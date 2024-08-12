@@ -19,7 +19,7 @@ public class Article {
     private String content;
     private  String  articleType;
 
-    @OneToMany(mappedBy = "commentedArticleId")
+    @OneToMany(mappedBy = "commentedArticle")
     @ToString.Exclude
     private List<Comment> commentList;
 }

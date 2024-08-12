@@ -1,12 +1,13 @@
 package com.example.ktech_project2.Controller;
 
 
+import com.example.ktech_project2.Model.Comment;
 import com.example.ktech_project2.Service.Services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,6 +27,25 @@ public class CommentController {
     ){
         services.createComment(articleId,content,password);
         model.addAttribute("article",services.findById(articleId));
-        return String.format("/articles/article-view",articleId);
+        model.addAttribute("commentList", services.getCommentList(articleId));
+        return  "/articles/article-view";
     }
+
+    @PostMapping("{articleId}/{id}/delete")
+    public String delete(Model model,
+                         @RequestParam("password") String password,
+                         @PathVariable("id") Long id,
+                         @PathVariable("articleId") Long articleId
+                         ){
+
+        Comment comment = services.readComment(id);
+        if(comment!=null && comment.getPassword().equals(password)){
+            services.deleteCommentById(id);
+        }
+        model.addAttribute("article",services.findById(articleId));
+        model.addAttribute("commentList", services.getCommentList(articleId));
+        return  "/articles/article-view";
+    }
+
+
 }

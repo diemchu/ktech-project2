@@ -55,9 +55,21 @@ public class Services {
     public void createComment(Long articleId,String content,String password){
         Comment comment = new Comment();
         comment.setPassword(password);
-        comment.setCommentedArticleId(findById(articleId));
+        comment.setCommentedArticle(findById(articleId));
         comment.setContent(content);
         System.out.println(comment);
         commentRepository.save(comment);
+    }
+    //getCommentList
+    public List<Comment> getCommentList(Long articleId){
+      return commentRepository.findAllByArticleId(articleId);
+    }
+    // delete comment by id
+    public  void deleteCommentById(Long id){
+        commentRepository.deleteById(id);
+    }
+    // get comment by id
+    public  Comment  readComment(Long id){
+        return commentRepository.findById(id).orElseThrow();
     }
 }

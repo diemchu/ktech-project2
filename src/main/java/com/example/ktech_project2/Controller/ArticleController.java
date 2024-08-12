@@ -38,6 +38,7 @@ public class ArticleController {
     public String articleView(@PathVariable("id") Long id,Model model){
         Article article = services.findById(id);
         model.addAttribute("article",article);
+        model.addAttribute("commentList", services.getCommentList(id));
         return "articles/article-view";
     }
 

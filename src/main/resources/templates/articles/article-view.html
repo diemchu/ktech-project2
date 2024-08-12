@@ -98,9 +98,9 @@
     </form>
 </div>
 
-<div id="div4" class="container">
-    <form>
-        <h3>  </h3>
+<div id="div4" class="container" th:each = "comment : ${commentList}">
+    <form th:action="@{/comments/{articleId}/{id}/delete(articleId=${article.id}, id=${comment.id})}" method="post">
+        <h3 >댓글 내용: [[${comment.content}]]</h3>
         <label for="comment-password">Password:</label>
         <input type="password" id="comment-password" name="password">
         <button type="submit" class="btn">댓글 삭제</button>

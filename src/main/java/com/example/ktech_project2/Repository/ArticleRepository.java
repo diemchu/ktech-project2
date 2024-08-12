@@ -2,6 +2,7 @@ package com.example.ktech_project2.Repository;
 
 
 import com.example.ktech_project2.Model.Article;
+import com.example.ktech_project2.Model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
