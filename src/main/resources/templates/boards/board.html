@@ -80,32 +80,32 @@
 <body>
 <div class="container">
     <div class="links">
-        <a href="#">전체 게시판</a>
-        <a href="#">자유 게시판</a>
-        <a href="#">개발 게시판</a>
-        <a href="#">일상 게시판</a>
-        <a href="#">사건사고 게시판</a>
+        <a href="/boards/board">전체 게시판</a>
+        <a href="/boards/자유게시판">자유 게시판</a>
+        <a href="/boards/개발게시판">개발 게시판</a>
+        <a href="/boards/일상게시판">일상 게시판</a>
+        <a href="/boards/사건사고게시판">사건사고 게시판</a>
     </div>
 
     <div class="content" id="content">
-        <p> 게시판 </p> <br>
-        <a href="#">게시글 작성</a>
+        <h1> [[${returnBoardType}]] </h1> <br>
+        <a href="/articles/new-article">게시글 작성</a>
     </div>
 
     <div class="table-container">
         <table>
             <thead>
             <tr>
-                <th>NO</th>
+                <th>#</th>
                 <th>TITLE</th>
                 <th>BOARD</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Sample Title 1</td>
-                <td>Sample Board 1</td>
+            <tr th:each = "article : ${boardList}">
+                <td> [[${article.id}]] </td>
+                <td> <a th:href="@{/articles/{id} (id = ${article.id})}">[[${article.title}]]</a> </td>
+                <td>[[${article.articleType}]]</td>
             </tr>
             </tbody>
         </table>

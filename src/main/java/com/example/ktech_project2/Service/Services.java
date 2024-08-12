@@ -7,12 +7,15 @@ import com.example.ktech_project2.Repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class Services {
     private final  ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
 
+    //게시판 작성 기능
     public void createArticle(String title,String content,String password,String articleType){
         Article article = new Article();
         article.setTitle(title);
@@ -20,5 +23,18 @@ public class Services {
         article.setArticleType(articleType);
         article.setContent(content);
         articleRepository.save(article);
+    }
+
+    // 모든 게시글 가져온다
+    public List<Article> readArticleAll(){
+        return  articleRepository.findAllOrderByIdDesc();
+    }
+    //게시판별로 데이터를 가져온디
+    public List<Article> findAllByArticleType(String articleType){
+        return articleRepository.findAllByArticleTypeOrderByIdDesc(articleType);
+    }
+    //아이디로 객체를 가져온다
+    public  Article findById(Long id){
+        return  articleRepository.findById(id).orElse(null);
     }
 }

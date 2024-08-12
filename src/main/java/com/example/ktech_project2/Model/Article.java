@@ -2,7 +2,6 @@ package com.example.ktech_project2.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
