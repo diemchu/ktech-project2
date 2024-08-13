@@ -18,7 +18,7 @@ public class BoardController {
     @GetMapping("board")
     public String board(Model model){
         model.addAttribute("boardList",services.readArticleAll());
-        model.addAttribute("returnBoardType","전체 게시판");
+        model.addAttribute("returnBoardType","전체게시판");
         return "boards/board";
     }
     @GetMapping("자유게시판")

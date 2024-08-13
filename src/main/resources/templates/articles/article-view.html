@@ -83,7 +83,11 @@
 </div>
 
 <div id="div2" class="container actions">
-    <a href="/boards/board" class="btn">돌아가기</a>
+    <a href="/boards/board" class="btn">게시판으로 가기</a>
+
+    <a  th:if = "${beforeBoard != null }"  th:href="@{/articles/{id} (id = ${beforeBoard.id})}" class="btn">아전글</a>
+    <a  th:if = "${nextBoard != null }"  th:href="@{/articles/{id} (id = ${nextBoard.id})}" class="btn">다음글</a>
+
     <a th:href="@{/articles/{id}/update (id=${article.id})}" class="btn">수정하기</a>
 </div>
 

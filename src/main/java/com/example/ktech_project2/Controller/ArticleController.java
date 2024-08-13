@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller()
 @RequestMapping("articles")
 @RequiredArgsConstructor
@@ -34,9 +36,25 @@ public class ArticleController {
         return "boards/board";
     }
 
+    @PostMapping("{id}")
+    public String postArticleView(@PathVariable("id") Long id) {
+        return String.format("redirect:/articles/%d",id);
+    }
     @GetMapping("{id}")
     public String articleView(@PathVariable("id") Long id,Model model){
         Article article = services.findById(id);
+        List<Article> articleList = services.readArticleAll();
+        int currentId = articleList.indexOf(article);
+        Article nextArticle = null;
+        Article beforeArticle = null;
+        if (currentId < articleList.size() - 1) {
+            nextArticle = articleList.get(currentId + 1);
+        }
+        if (currentId > 0) {
+            beforeArticle = articleList.get(currentId - 1);
+        }
+        model.addAttribute("nextBoard",nextArticle);
+        model.addAttribute("beforeBoard",beforeArticle);
         model.addAttribute("article",article);
         model.addAttribute("commentList", services.getCommentList(id));
         return "articles/article-view";
@@ -55,6 +73,10 @@ public class ArticleController {
         createModel(model);
         return "boards/board";
     }
+
+
+
+
 
     @RequestMapping("{id}/update")
     public String update(
