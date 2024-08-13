@@ -17,7 +17,6 @@ public class ArticleController {
     private final  Services services;
 
 
-
     @GetMapping("new-article")
     public String create() {
         return "articles/new-article";
@@ -33,7 +32,7 @@ public class ArticleController {
     ) {
        createModel(model);
         services.createArticle(title, content, password, articleType );
-        return "boards/board";
+        return "redirect:/boards/board";
     }
 
     @PostMapping("{id}")
@@ -71,7 +70,7 @@ public class ArticleController {
             services.deleteById(id);
         }
         createModel(model);
-        return "boards/board";
+        return "redirect:/boards/board";
     }
 
 
@@ -102,10 +101,41 @@ public class ArticleController {
             services.update(id,title,content,articleType);
         }
         createModel(model);
-        return "boards/board";
+        return "redirect:/boards/board";
     }
 
 
+    @PostMapping("article-tag")
+    public String searchByTag(@RequestParam("tag") String tag,
+                              Model model
+    ) {
+        final String  TAG =   String.format("#%s",tag);
+        model.addAttribute("articleList",services.findArticleAllByTag(TAG));
+        model.addAttribute("tag",TAG);
+        return "articles/article-tag";
+    }
+
+    @PostMapping("article-search")
+    public String search(@RequestParam("searchTern") String searchTern,
+                         @RequestParam("searchType") String searchType,
+                         @RequestParam("articleType") String articleType,
+                         Model model
+                         ) {
+
+        List<Article> articleList = null;
+        if(articleType.equals("전체게시판")){
+           articleList =  searchType.equals("content")?
+                    services.searchAllByContent(searchTern) :
+                    services.searchAllByTitle(searchTern);
+        }else{
+            articleList  = searchType.equals("content") ?
+                    services.searchAllByArticleTypeAndContent(articleType,searchTern) :
+                    services.searchAllByArticleTypeAndTitle(articleType , searchTern);
+        }
+        model.addAttribute("articleList",articleList);
+        model.addAttribute("searchTern",searchTern);
+        return "articles/article-search-view";
+    }
 
     public void createModel(Model model){
         model.addAttribute("boardList",services.readArticleAll());

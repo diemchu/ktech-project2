@@ -72,4 +72,28 @@ public class Services {
     public  Comment  readComment(Long id){
         return commentRepository.findById(id).orElseThrow();
     }
+
+    // find All article by tag
+    public List<Article> findArticleAllByTag(String tag ){
+        return  articleRepository.findAllByTag(tag);
+    }
+
+    // Search Tern by
+    public List<Article> searchAllByContent(String searchTern){
+        return  articleRepository.findAllByContent(searchTern);
+    }
+
+    public List<Article> searchAllByTitle(String searchTern){
+        return  articleRepository.findAllByTitle(searchTern);
+    }
+    public  List<Article> searchAllByArticleTypeAndContent(String contentType, String searchTern){
+        return articleRepository.findAllByArticleTypeAndContent(contentType,searchTern);
+
+    }
+    public  List<Article> searchAllByArticleTypeAndTitle(String  contentType, String searchTern ){
+        return articleRepository.findAllByArticleTypeAndTitle(contentType,searchTern);
+
+    }
+
+
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 게시판</title>
+    <title>게시판</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,6 +51,45 @@
             margin: 0;
             padding: 10px 0;
         }
+        .form-container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #66b2ff; /* Màu xanh nước biển nhạt */
+            color: #ffffff;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3399ff; /* Màu xanh nước biển đậm hơn khi di chuột qua */
+        }
         .table-container {
             background: #fff;
             padding: 15px;
@@ -88,11 +127,38 @@
     </div>
 
     <div class="content" id="content">
-        <h1> [[${returnBoardType}]] </h1> <br>
+        <h1>[[${returnBoardType}]]</h1> <br>
         <a href="/articles/new-article">게시글 작성</a>
     </div>
 
-    <div class="table-container">
+    <div class="form-container">
+        <form action="/articles/article-tag" method="post">
+            <label for="tag-input">해시태그 입력: </label>
+            <input type="text" id="tag-input" name="tag" required>
+            <button type="submit">찾기</button>
+        </form>
+    </div>
+
+    <div class="form-container">
+        <form action="/articles/article-search" method="post">
+            <label for="input">검색어: </label>
+            <input type="text" id="input" name="searchTern" required>
+            <label for="input-type">검색 기준 선택: </label>
+            <select id="input-type" name="searchType" required>
+                <option value="title">Title</option>
+                <option value="content">Content</option>
+            </select>
+            <input type="hidden" name="articleType" th:value="${returnBoardType}">
+            <button type="submit">찾기</button>
+        </form>
+    </div>
+
+
+    <div th:if="${boardList.isEmpty()}">
+        <h1>해당 데이터가 업습니다</h1>
+    </div>
+
+    <div  th:unless="${boardList.isEmpty()}" class="table-container">
         <table>
             <thead>
             <tr>
@@ -102,9 +168,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each = "article : ${boardList}">
-                <td> [[${article.id}]] </td>
-                <td> <a th:href="@{/articles/{id} (id = ${article.id})}">[[${article.title}]]</a> </td>
+            <tr th:each="article : ${boardList}">
+                <td>[[${article.id}]]</td>
+                <td><a th:href="@{/articles/{id} (id=${article.id})}">[[${article.title}]]</a></td>
                 <td>[[${article.articleType}]]</td>
             </tr>
             </tbody>
