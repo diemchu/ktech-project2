@@ -42,7 +42,7 @@ public class BoardController {
     @GetMapping("사건사고게시판")
     public String incidentBoard(Model model){
         model.addAttribute("returnBoardType","사건사고 게시판");
-        model.addAttribute("boardList",services.findAllByArticleType("사건사고 게시판"));
+        model.addAttribute("boardList",services.findAllByArticleType("사건사고게시판"));
         return "boards/board";
     }
 }

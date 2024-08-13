@@ -98,7 +98,11 @@
     </form>
 </div>
 
-<div id="div4" class="container" th:each = "comment : ${commentList}">
+
+<div th:if = "${commentList.isEmpty()}">
+    <h2>댓글이 업습니다</h2>
+</div>
+<div th:unless ="${commentList.isEmpty()}" id="div4" class="container" th:each = "comment : ${commentList}">
     <form th:action="@{/comments/{articleId}/{id}/delete(articleId=${article.id}, id=${comment.id})}" method="post">
         <h3 >댓글 내용: [[${comment.content}]]</h3>
         <label for="comment-password">Password:</label>
