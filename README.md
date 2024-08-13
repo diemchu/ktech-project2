@@ -10,7 +10,7 @@
 
 3. **애플리케이션 실행**  
    `KtechProject2Application.java` 파일에서 `main` 메서드를 실행하여 애플리케이션을 시작합니다.
-    
+
 ## 사용 기술 스택
 - **Java 8** (JDK 17.0.9)
 - **HTML, CSS**
