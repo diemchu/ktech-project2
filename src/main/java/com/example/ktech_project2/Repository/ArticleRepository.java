@@ -39,4 +39,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findAllByArticleTypeAndTitle(
             @Param("articleType") String articleType,
             @Param("searchTern") String searchTern);
+
 }

@@ -40,12 +40,26 @@ public class ArticleController {
         return String.format("redirect:/articles/%d",id);
     }
     @GetMapping("{id}")
-    public String articleView(@PathVariable("id") Long id,Model model){
+    public String articleView(@PathVariable("id") Long id,
+            // @PathVariable("articleType") String articleType,
+            Model model){
+
+
         Article article = services.findById(id);
         List<Article> articleList = services.readArticleAll();
+
+        // if(articleType.equals("전체게시판")){
+        //     articleList =  services.readArticleAll();
+        // }else{
+        //     articleList = services.findAllByArticleType(articleType);
+        // }
+
+        
         int currentId = articleList.indexOf(article);
         Article nextArticle = null;
         Article beforeArticle = null;
+
+
         if (currentId < articleList.size() - 1) {
             nextArticle = articleList.get(currentId + 1);
         }

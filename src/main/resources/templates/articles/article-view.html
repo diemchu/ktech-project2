@@ -75,7 +75,7 @@
     <h2>Title: [[${article.title}]]</h2>
     <form method="post" th:action="@{/articles/{id}/delete (id=${article.id})}">
         <label for="content">Content:</label>
-        <textarea id="content" name="content" rows="4" readonly>[[${article.content}]]</textarea>
+        <textarea id="content" name="content" rows="20" readonly>[[${article.content}]]</textarea>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
         <button type="submit" class="btn">게시글 삭제</button>
